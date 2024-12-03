@@ -88,12 +88,7 @@ class NewsFeedApp(QWidget):
 
         self.display_posts()
         
-        self.setStyleSheet(light_theme)
-        self.background_image = QPixmap('images/bg.jpg')
-        palette = QPalette()
-        palette.setBrush(QPalette.ColorRole.Window, QBrush(self.background_image))
-        self.setPalette(palette)
-        self.update()
+        self.setStyleSheet(baze_theme)
 
     def add_post(self):
         post_dialog = PostItem(self)
@@ -292,7 +287,7 @@ class ThemeDialog(QDialog):
         # Для темы 1
         theme1_layout = QHBoxLayout()  # Горизонтальный макет для картинки и кнопки
         self.theme1_image = QLabel()
-        self.theme1_image.setPixmap(QPixmap("images/light_theme.jpg").scaled(200, 143, Qt.AspectRatioMode.KeepAspectRatio))  # Замените на реальные пути
+        self.theme1_image.setPixmap(QPixmap("images/baze_theme.png").scaled(200, 143, Qt.AspectRatioMode.KeepAspectRatio))  # Замените на реальные пути
         self.theme1_button = QPushButton("Выбрать")
         self.theme1_button.clicked.connect(lambda: self.select_theme("Тема 1"))
         theme1_layout.addWidget(self.theme1_image)
@@ -305,7 +300,7 @@ class ThemeDialog(QDialog):
         # Для темы 2
         theme2_layout = QHBoxLayout()  # Горизонтальный макет для картинки и кнопки
         self.theme2_image = QLabel()
-        self.theme2_image.setPixmap(QPixmap("images/dark_theme.jpg").scaled(200, 143, Qt.AspectRatioMode.KeepAspectRatio))  # Замените на реальные пути
+        self.theme2_image.setPixmap(QPixmap("images/purple_theme.png").scaled(200, 143, Qt.AspectRatioMode.KeepAspectRatio))  # Замените на реальные пути
         self.theme2_button = QPushButton("Выбрать")
         self.theme2_button.clicked.connect(lambda: self.select_theme("Тема 2"))
         theme2_layout.addWidget(self.theme2_image)
@@ -315,7 +310,7 @@ class ThemeDialog(QDialog):
         # Для темы 3
         theme3_layout = QHBoxLayout()  # Горизонтальный макет для картинки и кнопки
         self.theme3_image = QLabel()
-        self.theme3_image.setPixmap(QPixmap("images/custom_theme.jpg").scaled(200, 143, Qt.AspectRatioMode.KeepAspectRatio))  # Замените на реальные пути
+        self.theme3_image.setPixmap(QPixmap("images/orange_theme.png").scaled(200, 143, Qt.AspectRatioMode.KeepAspectRatio))  # Замените на реальные пути
         self.theme3_button = QPushButton("Выбрать")
         self.theme3_button.clicked.connect(lambda: self.select_theme("Тема 3"))
         theme3_layout.addWidget(self.theme3_image)
@@ -325,7 +320,7 @@ class ThemeDialog(QDialog):
         # Для темы 4
         theme4_layout = QHBoxLayout()  # Горизонтальный макет для картинки и кнопки
         self.theme4_image = QLabel()
-        self.theme4_image.setPixmap(QPixmap("images/custom_theme_new.jpg").scaled(200, 143, Qt.AspectRatioMode.KeepAspectRatio))  # Замените на реальные пути
+        self.theme4_image.setPixmap(QPixmap("images/green_theme.png").scaled(200, 143, Qt.AspectRatioMode.KeepAspectRatio))  # Замените на реальные пути
         self.theme4_button = QPushButton("Выбрать")
         self.theme4_button.clicked.connect(lambda: self.select_theme("Тема 4"))
         theme4_layout.addWidget(self.theme4_image)
@@ -342,16 +337,16 @@ class ThemeDialog(QDialog):
 
     def select_theme(self, theme_name):
         if theme_name == "Тема 1":
-            self.parent().setStyleSheet(light_theme)
+            self.parent().setStyleSheet(baze_theme)
             style_for_border_light = """
                 border-radius: 5px;
                 border: 2px solid black;"""
         elif theme_name == "Тема 2":
-            self.parent().setStyleSheet(dark_theme)
+            self.parent().setStyleSheet(purple_theme)
         elif theme_name == "Тема 3":
-            self.parent().setStyleSheet(custom_theme)
+            self.parent().setStyleSheet(orange_theme)
         elif theme_name == "Тема 4":
-            self.parent().setStyleSheet(custom_theme_new)
+            self.parent().setStyleSheet(green_theme)
         self.accept()
 
 

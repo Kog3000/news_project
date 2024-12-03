@@ -1,4 +1,4 @@
-light_theme = """
+baze_theme = """
             QWidget {
                 background-color: #141414;
                 font-family: Courier New;
@@ -25,7 +25,6 @@ light_theme = """
                 color: white;
                 margin: 10px;
             }
-
             QComboBox {
                 margin: 10px;
                 background-color: rgba(0, 215, 55, 0);
@@ -35,19 +34,16 @@ light_theme = """
                 font-size: 14px;
                 color: white;
             }
-
             QComboBox:hover {
                 border-color: #669966;
             }
-
             QComboBox::drop-down {
                 background-color: rgba(0, 215, 55, 0);
                 border: 1px solid #ccc;
                 border-radius: 4px;
             }
-
             QComboBox QAbstractItemView {
-                background-color: black;
+                background-color: #141414;
                 opacity: .5;
                 margin: 0 10px 0 10px;
                 border: 1px solid #ccc;
@@ -56,17 +52,14 @@ light_theme = """
                 color: white;
                 padding: 5px;
             }
-
             QComboBox QAbstractItemView::item {
                 padding: 5px;
             }
-
             QLabel {
                 font-size: 14px;
                 color: #333;
                 margin-bottom: 5px;
             }
-
             QLabel {
                 color: #333;
                 font-size: 14px;
@@ -83,7 +76,7 @@ light_theme = """
             }
         """
 
-dark_theme = """
+purple_theme = """
             QWidget {
                 background-color: #2a2438;
                 font-family: Courier New;
@@ -110,7 +103,6 @@ dark_theme = """
                 color: white;
                 margin: 10px;
             }
-
             QComboBox {
                 margin: 10px;
                 background-color: rgba(0, 215, 55, 0);
@@ -120,19 +112,16 @@ dark_theme = """
                 font-size: 14px;
                 color: white;
             }
-
             QComboBox:hover {
                 border-color: #669966;
             }
-
             QComboBox::drop-down {
                 background-color: rgba(0, 215, 55, 0);
                 border: 1px solid #ccc;
                 border-radius: 4px;
             }
-
             QComboBox QAbstractItemView {
-                background-color: black;
+                background-color: rgb(116, 66, 200);
                 opacity: .5;
                 margin: 0 10px 0 10px;
                 border: 1px solid #ccc;
@@ -141,17 +130,14 @@ dark_theme = """
                 color: white;
                 padding: 5px;
             }
-
             QComboBox QAbstractItemView::item {
                 padding: 5px;
             }
-
             QLabel {
                 font-size: 14px;
                 color: #333;
                 margin-bottom: 5px;
             }
-
             QLabel {
                 color: #333;
                 font-size: 14px;
@@ -168,7 +154,7 @@ dark_theme = """
             }
             """
 
-custom_theme = """
+orange_theme = """
             QWidget {
                 background-color: #222831;
                 font-family: Courier New;
@@ -214,7 +200,7 @@ custom_theme = """
                 border-radius: 4px;
             }
             QComboBox QAbstractItemView {
-                background-color: black;
+                background-color: rgb(255, 87, 34);
                 opacity: .5;
                 margin: 0 10px 0 10px;
                 border: 1px solid #ccc;
@@ -247,7 +233,7 @@ custom_theme = """
             }
             """
 
-custom_theme_new = """
+green_theme = """
             QWidget {
                 background-color: #cedcc3;
                 font-family: Courier New;
@@ -282,7 +268,7 @@ custom_theme_new = """
                 border-radius: 4px;
                 padding: 10px;
                 font-size: 14px;
-                color: white;
+                color: black;
             }
             QComboBox:hover {
                 border-color: #669966;
@@ -293,7 +279,7 @@ custom_theme_new = """
                 border-radius: 4px;
             }
             QComboBox QAbstractItemView {
-                background-color: black;
+                background-color: rgb(30, 89, 60);
                 opacity: .5;
                 margin: 0 10px 0 10px;
                 border: 1px solid #000;
