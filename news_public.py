@@ -1,6 +1,7 @@
 import sys
 import datetime
 import sqlite3
+from themes import *
 from pydoc import describe
 
 from PyQt6.QtWidgets import (
@@ -37,15 +38,6 @@ class NewsFeedApp(QWidget):
         self.setGeometry(100, 80, 1000, 700)
 
         self.layout = QVBoxLayout()
-        
-        # предполагаемая погода с датой
-        #self.date = str(datetime.datetime.now())
-        #self.date = '.'.join(self.date[:self.date.index(' ')].split('-')[::-1])
-        
-        #self.weather_date = QLabel(self)
-        #text = f"1°C {self.date}"
-        #self.weather_date.setText(text)
-        #self.layout.addWidget(self.weather_date)
 
         self.post_button = QPushButton('Добавить пост', self)
         self.post_button.clicked.connect(self.add_post)
@@ -91,94 +83,10 @@ class NewsFeedApp(QWidget):
         for elem in result:
             new_post = NewsPost(elem[1], elem[3], elem[4], elem[2], elem[6])
             self.posts.append(new_post)
+            self.posts_for_txt.append(str(new_post))
         con.close()
 
         self.display_posts()
-
-        light_theme = """
-            QWidget {
-                background-color: #141414;
-                font-family: Courier New;
-                font-size: 12px;
-            }
-            QPushButton {
-                margin: 10px;
-                background-color: #993333;
-                color: white;
-                padding: 10px;
-                border-radius: 5px;
-                font-weight: bold;
-                font-size: 13px;
-            }
-            QPushButton:hover {
-                background-color: #993338;
-                font-size: 13.5px;
-            }
-            QLineEdit, QTextEdit {
-                padding: 10px;
-                border-radius: 5px;
-                border: 1px solid #ccc;
-                font-size: 14px;
-                color: white;
-                margin: 10px;
-            }
-            
-            QComboBox {
-                margin: 10px;
-                background-color: rgba(0, 215, 55, 0);
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                padding: 10px;
-                font-size: 14px;
-                color: white;
-            }
-
-            QComboBox:hover {
-                border-color: #669966;
-            }
-
-            QComboBox::drop-down {
-                background-color: rgba(0, 215, 55, 0);
-                border: 1px solid #ccc;
-                border-radius: 4px;
-            }
-
-            QComboBox QAbstractItemView {
-                background-color: black;
-                opacity: .5;
-                margin: 0 10px 0 10px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                selection-background-color: #4CAF50;  /* Зеленый при выделении */
-                color: white;
-                padding: 5px;
-            }
-
-            QComboBox QAbstractItemView::item {
-                padding: 5px;
-            }
-
-            QLabel {
-                font-size: 14px;
-                color: #333;
-                margin-bottom: 5px;
-            }
-            
-            QLabel {
-                color: #333;
-                font-size: 14px;
-                color: white;
-                background-color: rgba(0, 215, 55, 0);
-            }
-            QListWidget {
-                color: white;
-                background-color: rgba(0, 215, 55, 0);
-                border: 1px solid #ddd;
-                border-radius: 10px;
-                padding: 7px;
-                margin: 10px;
-            }
-        """
         
         self.setStyleSheet(light_theme)
         self.background_image = QPixmap('images/bg.jpg')
@@ -265,12 +173,13 @@ class NewsFeedApp(QWidget):
     def export_txt_button(self):
         if self.posts:
             file = open('news_history', 'w', encoding='utf-8')
+            file.write('-------------------------------------------------\n')
             for item in self.posts_for_txt:
                 file.write(item)
                 image = self.posts[self.posts_for_txt.index(item)].image_path
                 if image:
                     file.write(f'Путь до изображения: {image}\n')
-                file.write('\n')
+                file.write('-------------------------------------------------\n')
             file.close()
             info_message = 'Экспорт новостей в TXT завершен!\n\nНовости находятся в файле "news_history.txt".'
             QMessageBox.information(self, "Экспорт в TXT", info_message)
@@ -432,257 +341,6 @@ class ThemeDialog(QDialog):
         self.setLayout(self.layout)
 
     def select_theme(self, theme_name):
-        light_theme = """
-            QWidget {
-                background-color: #F8F4FF;
-                font-family: Arial, sans-serif;
-                font-size: 12px;
-            }
-            QPushButton {
-                background-color: #0095B6;
-                color: white;
-                padding: 10px;
-                border-radius: 5px;
-                font-weight: bold;
-                font-size: 13px;
-            }
-            QPushButton:hover {
-                background-color: #00a7cc;
-                font-size: 13.5px;
-            }
-            QLineEdit, QTextEdit {
-                padding: 10px;
-                border-radius: 5px;
-                border: 1px solid #ccc;
-                font-size: 14px;
-                color: black;
-            }
-            
-            QComboBox {
-                padding: 10px;
-                border-radius: 5px;
-                border: 1px solid #ccc;
-                font-size: 14px;
-                color: black;
-            }
-            QComboBox QAbstractItemView {
-                border: 2px solid darkgray;
-                selection-background-color: lightgray;
-                color: black
-            }
-            QComboBox::drop-down {
-                border: 0px;
-            }
-
-            
-            QComboBox QAbstractScrollArea QScrollBar:vertical {
-                width: 10px;
-                background-color: #f1ee04;
-            }
-            
-            QLabel {
-                color: #333;
-                font-size: 14px;
-                color: black;
-            }
-            QListWidget {
-                color: black;
-                background-color: #F8F4FF;
-                border: 1px solid #ddd;
-                border-radius: 10px;
-                padding: 7px;
-            }
-        """
-        
-        dark_theme = """
-            QWidget {
-                background-color: #2a2438;
-                font-family: Arial, sans-serif;
-                font-size: 12px;
-            }
-            QPushButton {
-                background-color: #7442C8;
-                color: white;
-                padding: 10px;
-                border-radius: 5px;
-                font-weight: bold;
-                font-size: 13px;
-            }
-            QPushButton:hover {
-                background-color: #8154cd;
-                font-size: 13.5px;
-            }
-            QLineEdit, QTextEdit {
-                padding: 10px;
-                border-radius: 5px;
-                border: 1px solid #ccc;
-                font-size: 14px;
-                color: white;
-            }
-            
-            QComboBox {
-                padding: 10px;
-                border-radius: 5px;
-                border: 1px solid #ccc;
-                font-size: 14px;
-                color: white;
-            }
-            QComboBox QAbstractItemView {
-                border: 2px solid darkgray;
-                selection-background-color: lightgray;
-                color: white;
-            }
-            QComboBox::drop-down {
-                border: 0px;
-            }
-
-            
-            QComboBox QAbstractScrollArea QScrollBar:vertical {
-                width: 10px;
-                background-color: #f1ee04;
-            }
-            
-            QLabel {
-                color: #333;
-                font-size: 14px;
-                color: white;
-            }
-            QListWidget {
-                color: white;
-                background-color: #2a2438;
-                border: 1px solid #ddd;
-                border-radius: 10px;
-                padding: 7px;
-            }"""
-
-        custom_theme = """
-            QWidget {
-                background-color: #222831;
-                font-family: Arial, sans-serif;
-                font-size: 12px;
-            }
-            QPushButton {
-                background-color: #ff5722;
-                color: #eeeeee;
-                padding: 10px;
-                border-radius: 5px;
-                font-weight: bold;
-                font-size: 13px;
-            }
-            QPushButton:hover {
-                background-color: #ff6433;
-                font-size: 13.5px;
-            }
-            QLineEdit, QTextEdit {
-                padding: 10px;
-                border-radius: 5px;
-                border: 1px solid #eeeeee;
-                font-size: 14px;
-                color: #eeeeee;
-                background-color: #393e46;
-            }
-            
-            QComboBox {
-                padding: 10px;
-                border-radius: 5px;
-                border: 1px solid #eeeeee;
-                font-size: 14px;
-                color: #eeeeee;
-                background-color: #393e46;
-            }
-            QComboBox QAbstractItemView {
-                border: 1px solid #eeeeee;
-                selection-background-color: #393e46;
-                color: #eeeeee;
-            }
-            QComboBox::drop-down {
-                border: 0px;
-            }
-
-            
-            QComboBox QAbstractScrollArea QScrollBar:vertical {
-                width: 10px;
-                background-color: #393e46;
-            }
-            
-            QLabel {
-                color: #eeeeee;
-                font-size: 14px;
-                color: white;
-            }
-            QListWidget {
-                color: #eeeeee;
-                background-color: #393e46;
-                border: 1px solid #eeeeee;
-                border-radius: 10px;
-                padding: 7px;
-            }"""
-
-        custom_theme_new = """
-            QWidget {
-                background-color: #cedcc3;
-                font-family: Arial, sans-serif;
-                font-size: 12px;
-            }
-            QPushButton {
-                background-color: #1E5945;
-                color: white;
-                padding: 10px;
-                border-radius: 5px;
-                font-weight: bold;
-                font-size: 13px;
-            }
-            QPushButton:hover {
-                background-color: #146348;
-                font-size: 13.5px;
-            }
-            QLineEdit, QTextEdit {
-                padding: 10px;
-                border-radius: 5px;
-                border: 1px solid #eff7d3;
-                font-size: 14px;
-                color: black;
-                background-color: #c2d3b4;
-            }
-            
-            QComboBox {
-                padding: 10px;
-                border-radius: 5px;
-                border: 1px solid #eff7d3;
-                font-size: 14px;
-                color: black;
-                background-color: #c2d3b4;
-            }
-            QComboBox QAbstractItemView {
-                border: 2px solid darkgray;
-                selection-background-color: #c2d3b4;
-                color: black
-            }
-            QComboBox::drop-down {
-                border: 0px;
-            }
-
-            
-            QComboBox QAbstractScrollArea QScrollBar:vertical {
-                width: 10px;
-                background-color: #c2d3b4;
-            }
-            
-            QLabel {
-                color: #333;
-                font-size: 14px;
-                color: black;
-            }
-            QListWidget {
-                color: black;
-                background-color: #c2d3b4;
-                border: 1px solid #eff7d3;
-                border-radius: 10px;
-                padding: 7px;
-            }
-        """
-
-        
         if theme_name == "Тема 1":
             self.parent().setStyleSheet(light_theme)
             style_for_border_light = """
@@ -694,7 +352,7 @@ class ThemeDialog(QDialog):
             self.parent().setStyleSheet(custom_theme)
         elif theme_name == "Тема 4":
             self.parent().setStyleSheet(custom_theme_new)
-        self.accept()  # Закрываем диалоговое окно после выбора
+        self.accept()
 
 
 if __name__ == "__main__":
